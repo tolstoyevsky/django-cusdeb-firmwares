@@ -1,0 +1,4 @@
+.idea
+dist
+django_cusdeb_firmwares.egg-info
+*.pyc
