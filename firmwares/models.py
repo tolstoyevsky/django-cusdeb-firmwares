@@ -18,5 +18,29 @@ from users.models import User
 
 
 class Firmware(models.Model):
+    DONE = 'done'
+    FAILED = 'failed'
+    BUILDING = 'building'
+    STATUS_CHOICES = (
+        (DONE, 'Done'),
+        (FAILED, 'Failed'),
+        (BUILDING, 'Building'),
+    )
     name = models.CharField(max_length=36)
     user = models.ForeignKey(User)
+    status = models.CharField(
+        max_length=8,
+        choices=STATUS_CHOICES,
+        default=DONE,
+    )
+    started_at = models.DateTimeField(
+        auto_now_add=True,
+        editable=False,
+        blank=True,
+        null=True,
+    )
+    finished_at = models.DateTimeField(
+        blank=True,
+        null=True,
+    )
+    log = models.TextField(blank=True)
