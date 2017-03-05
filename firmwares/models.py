@@ -21,10 +21,12 @@ class Firmware(models.Model):
     DONE = 'done'
     FAILED = 'failed'
     BUILDING = 'building'
+    INITIALIZED = 'initialized'
     STATUS_CHOICES = (
         (DONE, 'Done'),
         (FAILED, 'Failed'),
         (BUILDING, 'Building'),
+        (INITIALIZED, 'Initialized')
     )
     name = models.CharField(max_length=36)
     user = models.ForeignKey(User)
