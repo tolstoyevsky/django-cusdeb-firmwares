@@ -31,7 +31,7 @@ class Firmware(models.Model):
     name = models.CharField(max_length=36)
     user = models.ForeignKey(User)
     status = models.CharField(
-        max_length=8,
+        max_length=11,
         choices=STATUS_CHOICES,
         default=DONE,
     )
