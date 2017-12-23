@@ -46,3 +46,6 @@ class Firmware(models.Model):
         null=True,
     )
     log = models.TextField(blank=True)
+    pro_only = models.BooleanField(
+        default=False
+    )
