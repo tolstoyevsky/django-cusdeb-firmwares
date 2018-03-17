@@ -22,11 +22,17 @@ class Firmware(models.Model):
     FAILED = 'failed'
     BUILDING = 'building'
     INITIALIZED = 'initialized'
+    TAR_GZ = 'tar.gz'
+    IMG_GZ = 'img.gz'
     STATUS_CHOICES = (
         (DONE, 'Done'),
         (FAILED, 'Failed'),
         (BUILDING, 'Building'),
         (INITIALIZED, 'Initialized')
+    )
+    FORMAT_CHOISES = (
+        (TAR_GZ, 'Old tar.gz'),
+        (IMG_GZ, 'New img.gz')
     )
     name = models.CharField(max_length=36)
     user = models.ForeignKey(User)
@@ -48,4 +54,9 @@ class Firmware(models.Model):
     log = models.TextField(blank=True)
     pro_only = models.BooleanField(
         default=False
+    )
+    format = models.CharField(
+        max_length=6,
+        choices=FORMAT_CHOISES,
+        default=TAR_GZ,
     )
