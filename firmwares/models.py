@@ -17,6 +17,16 @@ from django.db import models
 from users.models import User
 
 
+class TargetDevice(models.Model):
+    full_name = models.CharField(max_length=80)
+    short_name = models.CharField(max_length=40)
+
+
+class Distro(models.Model):
+    full_name = models.CharField(max_length=80)
+    short_name = models.CharField(max_length=40)
+
+
 class Firmware(models.Model):
     DONE = 'done'
     FAILED = 'failed'
@@ -59,4 +69,16 @@ class Firmware(models.Model):
         max_length=6,
         choices=FORMAT_CHOISES,
         default=TAR_GZ,
+    )
+    targetdevice = models.ForeignKey(
+        TargetDevice,
+        models.SET_NULL,
+        blank=True,
+        null=True,
+    )
+    distro = models.ForeignKey(
+        Distro,
+        models.SET_NULL,
+        blank=True,
+        null=True,
     )
