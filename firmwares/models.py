@@ -72,13 +72,11 @@ class Firmware(models.Model):
     )
     targetdevice = models.ForeignKey(
         TargetDevice,
-        models.SET_NULL,
         blank=True,
         null=True,
     )
     distro = models.ForeignKey(
         Distro,
-        models.SET_NULL,
         blank=True,
         null=True,
     )
