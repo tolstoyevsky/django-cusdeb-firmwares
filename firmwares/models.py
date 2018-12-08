@@ -34,6 +34,7 @@ class Firmware(models.Model):
     INITIALIZED = 'initialized'
     TAR_GZ = 'tar.gz'
     IMG_GZ = 'img.gz'
+    ART_MENDER = 'mender'
     STATUS_CHOICES = (
         (DONE, 'Done'),
         (FAILED, 'Failed'),
@@ -42,7 +43,8 @@ class Firmware(models.Model):
     )
     FORMAT_CHOISES = (
         (TAR_GZ, 'Old tar.gz'),
-        (IMG_GZ, 'New img.gz')
+        (IMG_GZ, 'New img.gz'),
+        (ART_MENDER, 'Mender artifact')
     )
     name = models.CharField(max_length=36)
     user = models.ForeignKey(User)
