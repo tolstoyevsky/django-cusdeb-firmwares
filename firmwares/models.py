@@ -27,6 +27,10 @@ class Distro(models.Model):
     short_name = models.CharField(max_length=40)
 
 
+class BuildType(models.Model):
+    full_name = models.CharField(max_length=80)
+
+
 class Firmware(models.Model):
     DONE = 'done'
     FAILED = 'failed'
@@ -79,6 +83,11 @@ class Firmware(models.Model):
     )
     distro = models.ForeignKey(
         Distro,
+        blank=True,
+        null=True,
+    )
+    build_type = models.ForeignKey(
+        BuildType,
         blank=True,
         null=True,
     )
