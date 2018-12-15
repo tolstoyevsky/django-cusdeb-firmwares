@@ -28,6 +28,7 @@ class Distro(models.Model):
 
 
 class BuildType(models.Model):
+    MENDER_ARTIFACT = 3;
     full_name = models.CharField(max_length=80)
 
 
@@ -94,3 +95,14 @@ class Firmware(models.Model):
     notes = models.TextField(
         default='',
     )
+
+    def set_build_type(self, build_type):
+        buildType = BuildType.objects.get(pk=build_type)
+        if (buildType):
+            self.build_type = buildType
+            if build_type == BuildType.MENDER_ARTIFACT:
+                self.firmware_format = Firmware.ART_MENDER
+            else:
+                self.firmware_format = Firmware.IMG_GZ
+        else:
+            self.firmware_format = Firmware.IMG_GZ
