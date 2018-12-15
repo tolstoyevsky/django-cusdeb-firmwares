@@ -91,3 +91,6 @@ class Firmware(models.Model):
         blank=True,
         null=True,
     )
+    notes = models.TextField(
+        default='',
+    )
