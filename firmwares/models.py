@@ -96,13 +96,9 @@ class Firmware(models.Model):
         default='',
     )
 
-    def set_build_type(self, build_type):
-        buildType = BuildType.objects.get(pk=build_type)
-        if (buildType):
-            self.build_type = buildType
-            if build_type == BuildType.MENDER_ARTIFACT:
-                self.firmware_format = Firmware.ART_MENDER
-            else:
-                self.firmware_format = Firmware.IMG_GZ
+    def set_build_type(self, build_type_id):
+        self.build_type = BuildType.objects.get(pk=build_type_id)
+        if self.build_type == BuildType.MENDER_ARTIFACT:
+            self.firmware_format = Firmware.ART_MENDER
         else:
             self.firmware_format = Firmware.IMG_GZ
