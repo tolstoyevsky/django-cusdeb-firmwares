@@ -16,6 +16,8 @@ from django.db import models
 
 from users.models import User
 
+MENDER_ARTIFACT = 3
+
 
 class TargetDevice(models.Model):
     full_name = models.CharField(max_length=80)
@@ -28,7 +30,6 @@ class Distro(models.Model):
 
 
 class BuildType(models.Model):
-    MENDER_ARTIFACT = 3;
     full_name = models.CharField(max_length=80)
 
 
@@ -98,7 +99,7 @@ class Firmware(models.Model):
 
     def set_build_type(self, build_type_id):
         self.build_type = BuildType.objects.get(pk=build_type_id)
-        if self.build_type == BuildType.MENDER_ARTIFACT:
+        if self.build_type == MENDER_ARTIFACT:
             self.firmware_format = Firmware.ART_MENDER
         else:
             self.firmware_format = Firmware.IMG_GZ
