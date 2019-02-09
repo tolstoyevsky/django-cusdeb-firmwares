@@ -33,6 +33,10 @@ class BuildType(models.Model):
     full_name = models.CharField(max_length=80)
 
 
+class UnknownBuildTypeId(Exception):
+    """Exception raised when attempting to get an unknow build type. """
+
+
 class Firmware(models.Model):
     DONE = 'done'
     FAILED = 'failed'
@@ -99,7 +103,9 @@ class Firmware(models.Model):
 
     def set_build_type(self, build_type_id):
         self.build_type = BuildType.objects.get(pk=build_type_id)
-        if self.build_type == MENDER_ARTIFACT:
+        if self.build_type is None:
+            raise UnknownBuildTypeId('Unknow build_type_id {}'.format(build_type_id))
+        if self.build_type.id == MENDER_ARTIFACT:
             self.format = Firmware.ART_MENDER
         else:
             self.format = Firmware.IMG_GZ
